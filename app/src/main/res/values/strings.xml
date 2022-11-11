@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Chin-ga-Chuks</string>
+    <string name="choose_1">Ножницы</string>
+    <string name="choose_2">Камень</string>
+    <string name="choose_3">Бумага</string>
+    <string-array name="chooseNames">
+        <item>Ножницы</item>
+        <item>Бумага</item>
+        <item>камень</item>
+    </string-array>
+
+</resources>
