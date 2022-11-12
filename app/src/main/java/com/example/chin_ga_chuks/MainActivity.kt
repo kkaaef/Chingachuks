@@ -1,5 +1,6 @@
 package com.example.chin_ga_chuks
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,13 +12,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+    companion object {
+        const val USER_NAME: String = ""
+    }
     var scoreUser = 0
     var scoreComp = 0
+    @Override
     fun choose(view: View) {
+        val name = intent.getStringExtra(USER_NAME)
         val arr = arrayOf("Камень","Ножницы","Бумага")
         val compChoose = arr[(Math.random()*3).toInt()]
-        val result = findViewById(R.id.result) as TextView
-        val score = findViewById(R.id.score) as TextView
+        val result = findViewById<TextView>(R.id.result)
+        val score = findViewById<TextView>(R.id.score)
         view as Button
         var res =""
         if (view.text =="Бумага" && compChoose == "Камень"){
@@ -36,7 +42,9 @@ class MainActivity : AppCompatActivity() {
             res="Ты проиграл"
             scoreComp+=1}
         result.setText("Ты выбрал \"${view.text}\" а компьютер выбрал: \"$compChoose\" \n итог: $res")
-        score.setText("$scoreUser - $scoreComp")
+        score.setText("$name: $scoreUser -  Computer: $scoreComp")
 
     }
+
+
 }
