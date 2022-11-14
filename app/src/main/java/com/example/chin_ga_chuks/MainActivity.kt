@@ -8,22 +8,27 @@ import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+    private var score: TextView? = null
+    private var name = ""
+    companion object {
+        const val USER_NAME: String = ""
+
+    }
+    private var scoreUser = 0
+    private var scoreComp = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        name = intent.getStringExtra(USER_NAME).toString()
+        score = findViewById<TextView>(R.id.score)
+        score?.setText("$name: $scoreUser -  Computer: $scoreComp")
     }
-    companion object {
-        const val USER_NAME: String = ""
-    }
-    var scoreUser = 0
-    var scoreComp = 0
+
     @Override
     fun choose(view: View) {
-        val name = intent.getStringExtra(USER_NAME)
         val arr = arrayOf("Камень","Ножницы","Бумага")
         val compChoose = arr[(Math.random()*3).toInt()]
         val result = findViewById<TextView>(R.id.result)
-        val score = findViewById<TextView>(R.id.score)
         view as Button
         var res =""
         if (view.text =="Бумага" && compChoose == "Камень"){
@@ -42,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             res="Ты проиграл"
             scoreComp+=1}
         result.setText("Ты выбрал \"${view.text}\" а компьютер выбрал: \"$compChoose\" \n итог: $res")
-        score.setText("$name: $scoreUser -  Computer: $scoreComp")
+        score?.text = "$name: $scoreUser -  Computer: $scoreComp"
 
     }
 
