@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     }
     private var scoreUser = 0
     private var scoreComp = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,11 +25,12 @@ class MainActivity : AppCompatActivity() {
         score?.setText("$name: $scoreUser -  Computer: $scoreComp")
     }
 
-    @Override
+
+
     fun choose(view: View) {
+        var result = findViewById<TextView>(R.id.result)
         val arr = arrayOf("Камень","Ножницы","Бумага")
         val compChoose = arr[(Math.random()*3).toInt()]
-        val result = findViewById<TextView>(R.id.result)
         view as Button
         var res =""
         if (view.text =="Бумага" && compChoose == "Камень"){
@@ -46,10 +48,14 @@ class MainActivity : AppCompatActivity() {
         else{
             res="Ты проиграл"
             scoreComp+=1}
-        result.setText("Ты выбрал \"${view.text}\" а компьютер выбрал: \"$compChoose\" \n итог: $res")
+        result?.text = "Ты выбрал \"${view.text}\" а компьютер выбрал: \"$compChoose\" \n итог: $res"
         score?.text = "$name: $scoreUser -  Computer: $scoreComp"
 
     }
-
-
+    fun sendResult(view: View) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, score?.text)
+        startActivity(intent)
+        }
 }
